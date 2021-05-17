@@ -31,7 +31,7 @@ pipeline {
         stage('Analisis estatico') {
             steps {
                 bat "mvnw site"
-                bat "mvnw checkstyle:checkstyle pmd:pmd pmd:cpd findbugs:findbugs com.github.spotbugs:spotbugs-maven-plugin:3.1.7:spotbugs"
+                bat "mvnw checkstyle:checkstyle pmd:pmd pmd:cpd com.github.spotbugs:spotbugs-maven-plugin:4.2.0:spotbugs"
             }
         }
     }
