@@ -5,6 +5,7 @@ public class Producto {
 	private Integer id;
 	private String descripcion;
 	private Double precio;
+	private boolean habilitado;
 
 	public Integer getId() {
 		return id;
@@ -24,6 +25,8 @@ public class Producto {
 	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
+	public boolean isHabilitado() { return habilitado; }
+	public void setHabilitado(boolean habilitado) { this.habilitado = habilitado; }
 
 	@Override
 	public String toString() {
