@@ -1,6 +1,7 @@
 package rest;
 
 import domain.MovimientoStock;
+import domain.Producto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -21,6 +22,11 @@ public class MovimientoStockRest {
 
     private static final List<MovimientoStock> listaMovimientos = new ArrayList<>();
     private static Integer ID_GEN = 1;
+
+    @GetMapping
+    public ResponseEntity<List<MovimientoStock>> todos() {
+        return ResponseEntity.ok(listaMovimientos);
+    }
 
     @GetMapping(path = "/{id}")
     @ApiOperation(value = "Busca un movimiento por id")
