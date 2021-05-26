@@ -9,6 +9,8 @@ public class Provision {
     private Instant fechaProvision;
     private List<DetalleProvision> detalle;
 
+    private boolean anulada;
+
     public Integer getId() {
         return id;
     }
@@ -28,5 +30,12 @@ public class Provision {
         this.detalle = detalle;
     }
 
+    public boolean isAnulada() {
+        return anulada;
+    }
+
+    public void setAnulada(boolean anulada) {
+        this.anulada = anulada;
+    }
 
 }
