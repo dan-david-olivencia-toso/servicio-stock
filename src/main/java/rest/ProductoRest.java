@@ -66,12 +66,22 @@ public class ProductoRest {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Producto> borrar(@PathVariable Integer id){
-        OptionalInt indexOpt = IntStream.range(0, listaProductos.size())
-                .filter(i -> listaProductos.get(i).getId().equals(id))
-                .findFirst();
-        if(indexOpt.isPresent()){
-            listaProductos.remove(indexOpt.getAsInt());
+    public ResponseEntity<Producto> borrar(@PathVariable Integer id) throws Exception{
+
+        boolean exists = false;
+
+        for(Producto producto: listaProductos){
+            if(producto.getId().equals(id)){
+                if(!producto.isHabilitado()){
+                    throw new Exception("El producto vinculado al ID" + id + "ya ha sido eliminado");
+                }
+                else{
+                    producto.setHabilitado(false);
+                }
+            }
+        }
+
+        if(exists){
             return ResponseEntity.ok().build();
         } else{
             return ResponseEntity.notFound().build();
