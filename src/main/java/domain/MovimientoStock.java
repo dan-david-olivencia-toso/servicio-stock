@@ -10,6 +10,7 @@ public class MovimientoStock {
     private Integer cantidadEntrada;
     private Integer cantidadSalida;
     private Instant fecha;
+    private boolean anulado;
 
     public Integer getId() {
         return id;
@@ -17,9 +18,7 @@ public class MovimientoStock {
     public void setId(Integer id) {
         this.id = id;
     }
-    public DetallePedido getDetallePedido() {
-        return detallePedido;
-    }
+    public DetallePedido getDetallePedido() { return detallePedido; }
     public void setDetallePedido(DetallePedido detallePedido) {
         this.detallePedido = detallePedido;
     }
@@ -53,4 +52,6 @@ public class MovimientoStock {
     public void setFecha(Instant fecha) {
         this.fecha = fecha;
     }
+    public boolean isAnulado() { return anulado; }
+    public void setAnulado(boolean anulado) { this.anulado = anulado; }
 }
