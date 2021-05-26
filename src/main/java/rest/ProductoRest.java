@@ -66,24 +66,24 @@ public class ProductoRest {
     }
 
     @DeleteMapping(path = "/{id}")
+    @ApiOperation(value = "Borra lógicamente un producto")
     public ResponseEntity<Producto> borrar(@PathVariable Integer id) throws Exception{
+        OptionalInt indexOpt = IntStream.range(0, listaProductos.size())
+                .filter(i -> listaProductos.get(i).getId().equals(id))
+                .findFirst();
 
-        boolean exists = false;
-
-        for(Producto producto: listaProductos){
-            if(producto.getId().equals(id)){
-                if(!producto.isHabilitado()){
-                    throw new Exception("El producto vinculado al ID" + id + "ya ha sido eliminado");
-                }
-                else{
-                    producto.setHabilitado(false);
-                }
+        if(indexOpt.isPresent()){
+            Producto productoParaEliminar = listaProductos.get(indexOpt.getAsInt());
+            if(!productoParaEliminar.isHabilitado()){
+                throw new Exception("El producto vinculado al ID" + id + "ya ha sido eliminado");
             }
-        }
-
-        if(exists){
+            productoParaEliminar.setHabilitado(false);
+            listaProductos.set(indexOpt.getAsInt(), productoParaEliminar);
             return ResponseEntity.ok().build();
-        } else{
+
+
+        }
+        else{
             return ResponseEntity.notFound().build();
         }
     }
