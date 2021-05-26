@@ -75,7 +75,7 @@ public class ProductoRest {
         if(indexOpt.isPresent()){
             Producto productoParaEliminar = listaProductos.get(indexOpt.getAsInt());
             if(!productoParaEliminar.isHabilitado()){
-                throw new Exception("El producto vinculado al ID" + id + "ya ha sido eliminado");
+                throw new Exception("El producto vinculado al ID " + id + "ya ha sido eliminado");
             }
             productoParaEliminar.setHabilitado(false);
             listaProductos.set(indexOpt.getAsInt(), productoParaEliminar);
