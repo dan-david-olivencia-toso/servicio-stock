@@ -6,8 +6,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import service.MovimientoStockService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,9 @@ import java.util.stream.IntStream;
 @RequestMapping("/api/stock")
 @Api(value = "StockRest", description = "Permite gestionar la información referida los movimientos de stock de la empresa, producto de la compra y venta de productos")
 public class MovimientoStockRest {
+
+    @Autowired
+    MovimientoStockService movimientoStockService;
 
     private static final List<MovimientoStock> listaMovimientos = new ArrayList<>();
     private static Integer ID_GEN = 1;
@@ -40,10 +46,14 @@ public class MovimientoStockRest {
 
     @PostMapping
     @ApiOperation(value = "Agrega un nuevo movimiento de stock")
-    public ResponseEntity<MovimientoStock> crear(@RequestBody MovimientoStock nuevo){
-        nuevo.setId(ID_GEN++);
-        listaMovimientos.add(nuevo);
-        return ResponseEntity.ok(nuevo);
+    public ResponseEntity<?> crear(@RequestBody MovimientoStock nuevo){
+        MovimientoStock ms = null;
+        try {
+            ms = this.movimientoStockService.crear(nuevo);
+        } catch (Exception e1) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e1.getMessage());
+        }
+        return ResponseEntity.ok(ms);
     }
 
     @PutMapping(path = "/{id}")
