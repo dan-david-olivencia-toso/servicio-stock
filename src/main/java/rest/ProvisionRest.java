@@ -1,12 +1,17 @@
 package rest;
 
+import domain.MovimientoStock;
 import domain.Provision;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import service.MovimientoStockService;
+import service.ProvisionService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +23,9 @@ import java.util.stream.IntStream;
 @RequestMapping("/api/provision")
 @Api(value = "ProvisionRest", description = "Permite gestionar la información relacionada a las órdenes de provisión generadas por la empresa para cumplir con los pedidos de sus clientes")
 public class ProvisionRest {
+
+    @Autowired
+    ProvisionService provisionService;
 
     private static final List<Provision> listaProvisiones = new ArrayList<>();
     private static Integer ID_GEN = 1;
@@ -36,10 +44,14 @@ public class ProvisionRest {
     }
 
     @PostMapping
-    public ResponseEntity<Provision> crear(@RequestBody Provision nuevo){
-        nuevo.setId(ID_GEN++);
-        listaProvisiones.add(nuevo);
-        return ResponseEntity.ok(nuevo);
+    public ResponseEntity<?> crear(@RequestBody Provision nuevo){
+        Provision p = null;
+        try {
+            p = this.provisionService.crear(nuevo);
+        } catch (Exception e1) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e1.getMessage());
+        }
+        return ResponseEntity.ok(p);
     }
 
     @PutMapping(path = "/{id}")
