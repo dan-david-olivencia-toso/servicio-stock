@@ -24,7 +24,7 @@ import java.util.List;
 @Component
 public class DetallePedidoConsumer {
 
-    public static void main(String[] args) {
+    public static void main(String args[]) {
         final ApplicationContext rabbitConfig = new AnnotationConfigApplicationContext(RabbitConfiguration.class);
         final ConnectionFactory rabbitConnectionFactory = rabbitConfig.getBean(ConnectionFactory.class);
         final Queue rabbitQueue = rabbitConfig.getBean(Queue.class);
@@ -37,7 +37,7 @@ public class DetallePedidoConsumer {
 
         listenerContainer.setMessageListener(new MessageListener() {
             public void onMessage(Message message) {
-                final DetallePedido detallePedidoRecibido = (DetallePedido) messageConverter.fromMessage(message);
+                String detallePedidoRecibido = (String) messageConverter.fromMessage(message);
                 // TODO: Procesamiento de DetallePedido -->  Registrar un movimiento de stock del producto y además actualizar el stock actual en la tabla de productos. Si se llegó a un stock debajo del mínimo se crea una nueva orden de provisión. //
                 System.out.println("Recibido desde RabbitMQ: " + detallePedidoRecibido);
             }
