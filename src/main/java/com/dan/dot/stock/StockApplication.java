@@ -2,12 +2,14 @@ package com.dan.dot.stock;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import service.rabbitmq.DetallePedidoConsumer;
 
 @SpringBootApplication
 public class StockApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(StockApplication.class, args);
+        DetallePedidoConsumer.main(args);
     }
 
 }
