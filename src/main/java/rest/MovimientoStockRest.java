@@ -86,10 +86,10 @@ public class MovimientoStockRest {
 
         if(indexOpt.isPresent()){
             MovimientoStock movimientoParaAnular = listaMovimientos.get(indexOpt.getAsInt());
-            if(movimientoParaAnular.isAnulado()){
+            if(movimientoParaAnular.isHabilitado()){
                 throw new Exception("El movimiento de stock vinculado al ID" + id + "ya ha sido anulado previamente");
             }
-            movimientoParaAnular.setAnulado(true);
+            movimientoParaAnular.setHabilitado(true);
             listaMovimientos.set(indexOpt.getAsInt(), movimientoParaAnular);
             return ResponseEntity.ok().build();
         }

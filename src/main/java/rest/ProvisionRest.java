@@ -84,10 +84,10 @@ public class ProvisionRest {
 
         if(indexOpt.isPresent()){
             Provision provisionParaAnular = listaProvisiones.get(indexOpt.getAsInt());
-            if(!provisionParaAnular.isAnulada()){
+            if(!provisionParaAnular.isHabilitado()){
                 throw new Exception("La orden de provisión de ID " + id + "ya se encuentra anulada");
             }
-            provisionParaAnular.setAnulada(true);
+            provisionParaAnular.setHabilitado(true);
             listaProvisiones.set(indexOpt.getAsInt(), provisionParaAnular);
             return ResponseEntity.ok().build();
         }

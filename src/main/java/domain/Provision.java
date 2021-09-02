@@ -1,26 +1,24 @@
 package domain;
 
-import java.time.Instant;
+import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
+@Entity
+@Table(name = "provision")
 public class Provision {
 
-    private Integer id;
-    private Instant fechaProvision;
-    private List<DetalleProvision> detalle;
-
-    private boolean anulada;
-
+    //region Getters & Setters
     public Integer getId() {
         return id;
     }
     public void setId(Integer id) {
         this.id = id;
     }
-    public Instant getFechaProvision() {
+    public Date getFechaProvision() {
         return fechaProvision;
     }
-    public void setFechaProvision(Instant fechaProvision) {
+    public void setFechaProvision(Date fechaProvision) {
         this.fechaProvision = fechaProvision;
     }
     public List<DetalleProvision> getDetalle() {
@@ -30,12 +28,24 @@ public class Provision {
         this.detalle = detalle;
     }
 
-    public boolean isAnulada() {
-        return anulada;
+    public boolean isHabilitado() {
+        return habilitado;
     }
 
-    public void setAnulada(boolean anulada) {
-        this.anulada = anulada;
+    public void setHabilitado(boolean anulada) {
+        this.habilitado = anulada;
     }
+    //endregion
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(name = "fecha_provision")
+    private Date fechaProvision;
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "provision")
+    private List<DetalleProvision> detalle;
+
+    private boolean habilitado;
 }

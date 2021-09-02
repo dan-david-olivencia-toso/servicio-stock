@@ -1,19 +1,15 @@
 package repository;
 
 import domain.MovimientoStock;
-import frsf.isi.dan.InMemoryRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public class MovimientoStockRepository extends InMemoryRepository<MovimientoStock> {
+public interface MovimientoStockRepository extends JpaRepository<MovimientoStock, Integer> {
+    public Optional<MovimientoStock> getById(MovimientoStock movimientoStock);
+    public boolean existsById(Integer id);
+    public MovimientoStock save(MovimientoStock movimientoStock);
 
-    @Override
-    public Integer getId(MovimientoStock movimientoStock) {
-        return movimientoStock.getId();
-    }
-
-    @Override
-    public void setId(MovimientoStock movimientoStock, Integer integer) {
-        movimientoStock.setId(integer);
-    }
 }

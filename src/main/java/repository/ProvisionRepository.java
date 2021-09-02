@@ -1,21 +1,15 @@
 package repository;
 
-
-import domain.MovimientoStock;
 import domain.Provision;
-import frsf.isi.dan.InMemoryRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public class ProvisionRepository extends InMemoryRepository<Provision> {
+public interface ProvisionRepository extends JpaRepository<Provision, Integer> {
+    public Optional<Provision> getById(Provision provision);
+    public boolean existsById(Integer id);
+    public Provision save(Provision provision);
 
-    @Override
-    public Integer getId(Provision provision) {
-        return provision.getId();
-    }
-
-    @Override
-    public void setId(Provision provision, Integer integer) {
-        provision.setId(integer);
-    }
 }

@@ -1,9 +1,10 @@
 package domain;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "detalle_provision")
 public class DetalleProvision {
-    private Integer id;
-    private Producto producto;
-    private Integer cantidad;
 
     public Integer getId() {
         return id;
@@ -24,4 +25,13 @@ public class DetalleProvision {
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "id_producto", referencedColumnName = "id")
+    private Producto producto;
+    private Integer cantidad;
 }

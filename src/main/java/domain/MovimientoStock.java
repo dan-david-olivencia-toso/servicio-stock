@@ -1,33 +1,23 @@
 package domain;
 
-import java.time.Instant;
+import dto.Pedido;
 
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+@Table(name = "movimiento_stock")
 public class MovimientoStock {
-    private Integer id;
-    private DetallePedido detallePedido;
-    private DetalleProvision detalleProvision;
-    private Producto producto;
-    private Integer cantidadEntrada;
-    private Integer cantidadSalida;
-    private Instant fecha;
-    private boolean anulado;
 
+    //region Getters & Setters
     public Integer getId() {
         return id;
     }
     public void setId(Integer id) {
         this.id = id;
     }
-    public DetallePedido getDetallePedido() { return detallePedido; }
-    public void setDetallePedido(DetallePedido detallePedido) {
-        this.detallePedido = detallePedido;
-    }
-    public DetalleProvision getDetalleProvision() {
-        return detalleProvision;
-    }
-    public void setDetalleProvision(DetalleProvision detalleProvision) {
-        this.detalleProvision = detalleProvision;
-    }
+
+
     public Producto getProducto() {
         return producto;
     }
@@ -46,12 +36,57 @@ public class MovimientoStock {
     public void setCantidadSalida(Integer cantidadSalida) {
         this.cantidadSalida = cantidadSalida;
     }
-    public Instant getFecha() {
+    public Date getFecha() {
         return fecha;
     }
-    public void setFecha(Instant fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    public boolean isAnulado() { return anulado; }
-    public void setAnulado(boolean anulado) { this.anulado = anulado; }
+    public boolean isHabilitado() { return habilitado; }
+    public void setHabilitado(boolean anulado) { this.habilitado = anulado; }
+    public Pedido getPedido() {
+        return pedido;
+    }
+    public Provision getProvision() {
+        return provision;
+    }
+
+    public void setProvision(Provision provision) {
+        this.provision = provision;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+    //endregion
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    // Relación con pedido registra un movimiento que decrementa el stock
+    @OneToOne(optional = true, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_pedido", referencedColumnName = "id")
+    private Pedido pedido;
+
+    // Relación con provisión registra un movimiento que incrementa el stock
+
+    @OneToOne(optional = true, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_provision", referencedColumnName = "id")
+    private Provision provision;
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "id_producto", referencedColumnName = "id")
+    private Producto producto;
+
+    // Cero si el movimiento es por un pedido. Mayor a cero si es por una provisión.
+    @Column(name = "cantidad_entrada")
+    private Integer cantidadEntrada;
+
+    // Cero si el movimiento es por una provisión. Mayor a cero si es por un pedido.
+    @Column(name = "cantidad_salida")
+    private Integer cantidadSalida;
+
+    private Date fecha;
+    private boolean habilitado;
 }

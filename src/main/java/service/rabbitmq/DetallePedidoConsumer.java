@@ -1,9 +1,5 @@
 package service.rabbitmq;
 
-import domain.DetallePedido;
-import domain.MovimientoStock;
-import domain.Producto;
-import domain.Provision;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.core.Queue;
@@ -11,15 +7,10 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.amqp.support.converter.SimpleMessageConverter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ErrorHandler;
-import service.MovimientoStockService;
-import service.ProvisionService;
-
-import java.util.List;
 
 @Component
 public class DetallePedidoConsumer {
