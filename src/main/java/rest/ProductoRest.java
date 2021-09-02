@@ -14,6 +14,7 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
+@CrossOrigin(maxAge = 36000)
 @RestController
 @RequestMapping("/api/producto")
 @Api(value = "ProductoRest", description = "Permite gestionar la información referida a los productos que ofrece la empresa para la venta")

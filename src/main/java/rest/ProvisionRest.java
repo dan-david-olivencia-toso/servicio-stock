@@ -1,6 +1,5 @@
 package rest;
 
-import domain.MovimientoStock;
 import domain.Provision;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.MovimientoStockService;
 import service.ProvisionService;
 
 import java.util.ArrayList;
@@ -19,6 +17,7 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
+@CrossOrigin(maxAge = 36000)
 @RestController
 @RequestMapping("/api/provision")
 @Api(value = "ProvisionRest", description = "Permite gestionar la información relacionada a las órdenes de provisión generadas por la empresa para cumplir con los pedidos de sus clientes")

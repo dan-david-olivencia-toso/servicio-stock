@@ -1,7 +1,6 @@
 package rest;
 
 import domain.MovimientoStock;
-import domain.Producto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -18,6 +17,7 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
+@CrossOrigin(maxAge = 36000)
 @RestController
 @RequestMapping("/api/stock")
 @Api(value = "StockRest", description = "Permite gestionar la información referida los movimientos de stock de la empresa, producto de la compra y venta de productos")
