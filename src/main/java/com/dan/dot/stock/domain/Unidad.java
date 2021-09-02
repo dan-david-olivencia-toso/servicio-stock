@@ -1,7 +1,6 @@
-package domain;
+package com.dan.dot.stock.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 

@@ -1,4 +1,4 @@
-package service.rabbitmq;
+package com.dan.dot.stock.service.rabbitmq;
 
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageListener;

@@ -1,10 +1,7 @@
-package dto;
-
-import com.sun.istack.NotNull;
+package com.dan.dot.stock.dto;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "pedido")

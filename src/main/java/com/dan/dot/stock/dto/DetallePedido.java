@@ -1,7 +1,7 @@
-package dto;
+package com.dan.dot.stock.dto;
 
+import  com.dan.dot.stock.domain.Producto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import domain.Producto;
 
 import javax.persistence.*;
 

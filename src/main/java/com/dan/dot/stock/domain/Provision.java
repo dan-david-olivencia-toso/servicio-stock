@@ -1,4 +1,4 @@
-package domain;
+package com.dan.dot.stock.domain;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,17 +21,9 @@ public class Provision {
     public void setFechaProvision(Date fechaProvision) {
         this.fechaProvision = fechaProvision;
     }
-    public List<DetalleProvision> getDetalle() {
-        return detalle;
-    }
-    public void setDetalle(List<DetalleProvision> detalle) {
-        this.detalle = detalle;
-    }
-
     public boolean isHabilitado() {
         return habilitado;
     }
-
     public void setHabilitado(boolean anulada) {
         this.habilitado = anulada;
     }
@@ -43,9 +35,6 @@ public class Provision {
 
     @Column(name = "fecha_provision")
     private Date fechaProvision;
-
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "provision")
-    private List<DetalleProvision> detalle;
 
     private boolean habilitado;
 }

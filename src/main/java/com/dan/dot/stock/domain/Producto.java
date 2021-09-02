@@ -1,4 +1,4 @@
-package domain;
+package com.dan.dot.stock.domain;
 
 import javax.persistence.*;
 

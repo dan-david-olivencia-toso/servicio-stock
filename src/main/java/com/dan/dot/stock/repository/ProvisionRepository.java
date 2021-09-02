@@ -1,6 +1,6 @@
-package repository;
+package com.dan.dot.stock.repository;
 
-import domain.Provision;
+import com.dan.dot.stock.domain.Provision;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

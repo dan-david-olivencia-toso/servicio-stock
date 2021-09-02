@@ -1,6 +1,6 @@
-package rest;
+package com.dan.dot.stock.rest;
 
-import domain.Producto;
+import com.dan.dot.stock.domain.Producto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

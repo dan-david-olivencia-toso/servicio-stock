@@ -1,6 +1,6 @@
-package domain;
+package com.dan.dot.stock.domain;
 
-import dto.Pedido;
+import com.dan.dot.stock.dto.Pedido;
 
 import javax.persistence.*;
 import java.util.Date;

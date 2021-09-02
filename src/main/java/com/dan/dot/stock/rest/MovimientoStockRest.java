@@ -1,6 +1,6 @@
-package rest;
+package com.dan.dot.stock.rest;
 
-import domain.MovimientoStock;
+import com.dan.dot.stock.domain.MovimientoStock;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.MovimientoStockService;
+import com.dan.dot.stock.service.MovimientoStockService;
 
 import java.util.ArrayList;
 import java.util.List;
