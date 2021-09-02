@@ -29,11 +29,13 @@ public class MovimientoStockRest {
     private static final List<MovimientoStock> listaMovimientos = new ArrayList<>();
     private static Integer ID_GEN = 1;
 
+    @CrossOrigin(maxAge = 86400)
     @GetMapping
     public ResponseEntity<List<MovimientoStock>> todos() {
         return ResponseEntity.ok(listaMovimientos);
     }
 
+    @CrossOrigin(maxAge = 86400)
     @GetMapping(path = "/{id}")
     @ApiOperation(value = "Busca un movimiento por id")
     public ResponseEntity<MovimientoStock> movimientoPorId(@PathVariable Integer id){
@@ -44,6 +46,7 @@ public class MovimientoStockRest {
         return ResponseEntity.of(m);
     }
 
+    @CrossOrigin(maxAge = 86400)
     @PostMapping
     @ApiOperation(value = "Agrega un nuevo movimiento de stock")
     public ResponseEntity<?> crear(@RequestBody MovimientoStock nuevo){
@@ -56,6 +59,7 @@ public class MovimientoStockRest {
         return ResponseEntity.ok(ms);
     }
 
+    @CrossOrigin(maxAge = 86400)
     @PutMapping(path = "/{id}")
     @ApiOperation(value = "Actualiza un movimiento de stock")
     @ApiResponses(value = {
@@ -77,6 +81,7 @@ public class MovimientoStockRest {
         }
     }
 
+    @CrossOrigin(maxAge = 86400)
     @DeleteMapping(path = "/{id}")
     @ApiOperation(value = "Anula un movimiento de stock")
     public ResponseEntity<MovimientoStock> borrar(@PathVariable Integer id) throws Exception{

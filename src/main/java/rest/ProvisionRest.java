@@ -29,9 +29,11 @@ public class ProvisionRest {
     private static final List<Provision> listaProvisiones = new ArrayList<>();
     private static Integer ID_GEN = 1;
 
+    @CrossOrigin(maxAge = 86400)
     @GetMapping
     public ResponseEntity<List<Provision>> todos() {return ResponseEntity.ok(listaProvisiones); }
 
+    @CrossOrigin(maxAge = 86400)
     @GetMapping(path = "/{id}")
     @ApiOperation(value = "Busca una orden de provisión por id")
     public ResponseEntity<Provision> provisionPorId(@PathVariable Integer id){
@@ -42,6 +44,7 @@ public class ProvisionRest {
         return ResponseEntity.of(p);
     }
 
+    @CrossOrigin(maxAge = 86400)
     @PostMapping
     public ResponseEntity<?> crear(@RequestBody Provision nuevo){
         Provision p = null;
@@ -53,6 +56,7 @@ public class ProvisionRest {
         return ResponseEntity.ok(p);
     }
 
+    @CrossOrigin(maxAge = 86400)
     @PutMapping(path = "/{id}")
     @ApiOperation(value = "Actualiza una orden de provisión")
     @ApiResponses(value = {
@@ -75,6 +79,7 @@ public class ProvisionRest {
         }
     }
 
+    @CrossOrigin(maxAge = 86400)
     @DeleteMapping(path = "/{id}")
     @ApiOperation(value = "Anula una orden de provisión")
     public ResponseEntity<Provision> borrar(@PathVariable Integer id) throws Exception{

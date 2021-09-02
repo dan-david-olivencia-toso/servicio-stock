@@ -23,11 +23,13 @@ public class ProductoRest {
     private static final List<Producto> listaProductos = new ArrayList<>();
     private static Integer ID_GEN = 1;
 
+    @CrossOrigin(maxAge = 86400)
     @GetMapping
     public ResponseEntity<List<Producto>> todos() {
         return ResponseEntity.ok(listaProductos);
     }
 
+    @CrossOrigin(maxAge = 86400)
     @GetMapping(path = "/{id}")
     @ApiOperation(value = "Busca un producto por id")
     public ResponseEntity<Producto> productoPorId(@PathVariable Integer id) {
@@ -38,6 +40,7 @@ public class ProductoRest {
         return ResponseEntity.of(p);
     }
 
+    @CrossOrigin(maxAge = 86400)
     @PostMapping
     public ResponseEntity<Producto> crear(@RequestBody Producto nuevo){
         nuevo.setId(ID_GEN++);
@@ -45,6 +48,7 @@ public class ProductoRest {
         return ResponseEntity.ok(nuevo);
     }
 
+    @CrossOrigin(maxAge = 86400)
     @PutMapping(path = "/{id}")
     @ApiOperation(value = "Actualiza un producto")
     @ApiResponses(value = {
@@ -66,6 +70,7 @@ public class ProductoRest {
         }
     }
 
+    @CrossOrigin(maxAge = 86400)
     @DeleteMapping(path = "/{id}")
     @ApiOperation(value = "Borra lógicamente un producto")
     public ResponseEntity<Producto> borrar(@PathVariable Integer id) throws Exception{
