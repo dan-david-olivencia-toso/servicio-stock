@@ -1,6 +1,6 @@
-package rest;
+package com.dan.dot.stock.rest;
 
-import domain.Producto;
+import com.dan.dot.stock.domain.Producto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -14,6 +14,7 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
+@CrossOrigin(maxAge = 36000)
 @RestController
 @RequestMapping("/api/producto")
 @Api(value = "ProductoRest", description = "Permite gestionar la información referida a los productos que ofrece la empresa para la venta")
@@ -22,11 +23,13 @@ public class ProductoRest {
     private static final List<Producto> listaProductos = new ArrayList<>();
     private static Integer ID_GEN = 1;
 
+    @CrossOrigin(maxAge = 86400)
     @GetMapping
     public ResponseEntity<List<Producto>> todos() {
         return ResponseEntity.ok(listaProductos);
     }
 
+    @CrossOrigin(maxAge = 86400)
     @GetMapping(path = "/{id}")
     @ApiOperation(value = "Busca un producto por id")
     public ResponseEntity<Producto> productoPorId(@PathVariable Integer id) {
@@ -37,6 +40,7 @@ public class ProductoRest {
         return ResponseEntity.of(p);
     }
 
+    @CrossOrigin(maxAge = 86400)
     @PostMapping
     public ResponseEntity<Producto> crear(@RequestBody Producto nuevo){
         nuevo.setId(ID_GEN++);
@@ -44,6 +48,7 @@ public class ProductoRest {
         return ResponseEntity.ok(nuevo);
     }
 
+    @CrossOrigin(maxAge = 86400)
     @PutMapping(path = "/{id}")
     @ApiOperation(value = "Actualiza un producto")
     @ApiResponses(value = {
@@ -65,6 +70,7 @@ public class ProductoRest {
         }
     }
 
+    @CrossOrigin(maxAge = 86400)
     @DeleteMapping(path = "/{id}")
     @ApiOperation(value = "Borra lógicamente un producto")
     public ResponseEntity<Producto> borrar(@PathVariable Integer id) throws Exception{

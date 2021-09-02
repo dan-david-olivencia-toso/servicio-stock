@@ -1,23 +1,4 @@
-package service.rabbitmq;
-
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
-import com.google.gson.reflect.TypeToken;
-import domain.DetallePedido;
-import domain.MovimientoStock;
-import domain.Producto;
-import domain.Provision;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import service.MovimientoStockService;
-import service.ProvisionService;
-
-import java.util.List;
+package com.dan.dot.stock.service.rabbitmq;
 
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Queue;

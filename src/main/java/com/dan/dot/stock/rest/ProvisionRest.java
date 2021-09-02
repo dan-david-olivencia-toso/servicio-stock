@@ -1,7 +1,6 @@
-package rest;
+package com.dan.dot.stock.rest;
 
-import domain.MovimientoStock;
-import domain.Provision;
+import com.dan.dot.stock.domain.Provision;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -10,8 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.MovimientoStockService;
-import service.ProvisionService;
+import com.dan.dot.stock.service.ProvisionService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +17,7 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
+@CrossOrigin(maxAge = 36000)
 @RestController
 @RequestMapping("/api/provision")
 @Api(value = "ProvisionRest", description = "Permite gestionar la información relacionada a las órdenes de provisión generadas por la empresa para cumplir con los pedidos de sus clientes")
@@ -30,9 +29,11 @@ public class ProvisionRest {
     private static final List<Provision> listaProvisiones = new ArrayList<>();
     private static Integer ID_GEN = 1;
 
+    @CrossOrigin(maxAge = 86400)
     @GetMapping
     public ResponseEntity<List<Provision>> todos() {return ResponseEntity.ok(listaProvisiones); }
 
+    @CrossOrigin(maxAge = 86400)
     @GetMapping(path = "/{id}")
     @ApiOperation(value = "Busca una orden de provisión por id")
     public ResponseEntity<Provision> provisionPorId(@PathVariable Integer id){
@@ -43,6 +44,7 @@ public class ProvisionRest {
         return ResponseEntity.of(p);
     }
 
+    @CrossOrigin(maxAge = 86400)
     @PostMapping
     public ResponseEntity<?> crear(@RequestBody Provision nuevo){
         Provision p = null;
@@ -54,6 +56,7 @@ public class ProvisionRest {
         return ResponseEntity.ok(p);
     }
 
+    @CrossOrigin(maxAge = 86400)
     @PutMapping(path = "/{id}")
     @ApiOperation(value = "Actualiza una orden de provisión")
     @ApiResponses(value = {
@@ -76,6 +79,7 @@ public class ProvisionRest {
         }
     }
 
+    @CrossOrigin(maxAge = 86400)
     @DeleteMapping(path = "/{id}")
     @ApiOperation(value = "Anula una orden de provisión")
     public ResponseEntity<Provision> borrar(@PathVariable Integer id) throws Exception{
@@ -85,10 +89,10 @@ public class ProvisionRest {
 
         if(indexOpt.isPresent()){
             Provision provisionParaAnular = listaProvisiones.get(indexOpt.getAsInt());
-            if(!provisionParaAnular.isAnulada()){
+            if(!provisionParaAnular.isHabilitado()){
                 throw new Exception("La orden de provisión de ID " + id + "ya se encuentra anulada");
             }
-            provisionParaAnular.setAnulada(true);
+            provisionParaAnular.setHabilitado(true);
             listaProvisiones.set(indexOpt.getAsInt(), provisionParaAnular);
             return ResponseEntity.ok().build();
         }

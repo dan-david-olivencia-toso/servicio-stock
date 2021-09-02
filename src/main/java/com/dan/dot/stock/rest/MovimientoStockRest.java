@@ -1,7 +1,6 @@
-package rest;
+package com.dan.dot.stock.rest;
 
-import domain.MovimientoStock;
-import domain.Producto;
+import com.dan.dot.stock.domain.MovimientoStock;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -10,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.MovimientoStockService;
+import com.dan.dot.stock.service.MovimientoStockService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +17,7 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
+@CrossOrigin(maxAge = 36000)
 @RestController
 @RequestMapping("/api/stock")
 @Api(value = "StockRest", description = "Permite gestionar la información referida los movimientos de stock de la empresa, producto de la compra y venta de productos")
@@ -29,11 +29,13 @@ public class MovimientoStockRest {
     private static final List<MovimientoStock> listaMovimientos = new ArrayList<>();
     private static Integer ID_GEN = 1;
 
+    @CrossOrigin(maxAge = 86400)
     @GetMapping
     public ResponseEntity<List<MovimientoStock>> todos() {
         return ResponseEntity.ok(listaMovimientos);
     }
 
+    @CrossOrigin(maxAge = 86400)
     @GetMapping(path = "/{id}")
     @ApiOperation(value = "Busca un movimiento por id")
     public ResponseEntity<MovimientoStock> movimientoPorId(@PathVariable Integer id){
@@ -44,6 +46,7 @@ public class MovimientoStockRest {
         return ResponseEntity.of(m);
     }
 
+    @CrossOrigin(maxAge = 86400)
     @PostMapping
     @ApiOperation(value = "Agrega un nuevo movimiento de stock")
     public ResponseEntity<?> crear(@RequestBody MovimientoStock nuevo){
@@ -56,6 +59,7 @@ public class MovimientoStockRest {
         return ResponseEntity.ok(ms);
     }
 
+    @CrossOrigin(maxAge = 86400)
     @PutMapping(path = "/{id}")
     @ApiOperation(value = "Actualiza un movimiento de stock")
     @ApiResponses(value = {
@@ -77,6 +81,7 @@ public class MovimientoStockRest {
         }
     }
 
+    @CrossOrigin(maxAge = 86400)
     @DeleteMapping(path = "/{id}")
     @ApiOperation(value = "Anula un movimiento de stock")
     public ResponseEntity<MovimientoStock> borrar(@PathVariable Integer id) throws Exception{
@@ -86,10 +91,10 @@ public class MovimientoStockRest {
 
         if(indexOpt.isPresent()){
             MovimientoStock movimientoParaAnular = listaMovimientos.get(indexOpt.getAsInt());
-            if(movimientoParaAnular.isAnulado()){
+            if(movimientoParaAnular.isHabilitado()){
                 throw new Exception("El movimiento de stock vinculado al ID" + id + "ya ha sido anulado previamente");
             }
-            movimientoParaAnular.setAnulado(true);
+            movimientoParaAnular.setHabilitado(true);
             listaMovimientos.set(indexOpt.getAsInt(), movimientoParaAnular);
             return ResponseEntity.ok().build();
         }
